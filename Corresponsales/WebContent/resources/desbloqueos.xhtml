@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>JSF tutorial</title>
+	<script>
+		  $( function() {
+		    $( "#accordion1" ).accordion();
+		  } );
+		</script>
+</h:head>
+<h:body>
+
+	<div id="accordion1">
+		<h3>Desbloqueo de Usuario</h3>
+		<div>
+			<h:form id="desbloqueoUsr">
+				<p>Para realizar el desbloqueo ingrese el usuario en el campo
+					correspondiente y de clic en el botón de continuar</p>
+				<p>
+					<label for="user">Usuario: </label>
+					<h:inputText id="inputName" value="#{userData.desUser}"></h:inputText>
+				</p>
+				<h:commandButton value="Continuar"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="inputName" render="contentDesUsr" onevent="monitor"
+						listener="#{userData.desbloquear}" />
+				</h:commandButton>
+
+				<h:panelGroup id="contentDesUsr">
+
+					<div class="#{userData.desResponse.divStyle}"
+						style="margin-top: 20px; padding: 0 .7em;">
+						<p>
+							<span class="#{userData.desResponse.icon}"
+								style="float: left; margin-right: .3em;"></span> <strong><h:outputText
+									id="outputTypeBlqUsr" value="#{userData.desResponse.name}" /></strong>&nbsp;
+							<h:outputText id="outputMessageBlqUsr"
+								value="#{userData.desResponse.descripcion}" />
+						</p>
+					</div>
+					<br></br>
+				</h:panelGroup>
+			</h:form>
+		</div>
+
+		<h3>Desbloqueo de Bolsón</h3>
+		<div>
+			<h:form id="desbloqueoBol">
+				<p>1.- Realice la consulta para estar seguro de que es el Bolsón
+					que desea desbloquear.</p>
+				<p>
+					<label for="bolson">Búsqueda por Razón Social, RFC o ID: </label>
+					<h:inputText id="inputBolson" value="#{bolsonData.desUser}"></h:inputText>
+				</p>
+				<h:commandButton value="Buscar"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="@form" render="@form" onevent="monitor"
+						listener="#{bolsonData.buscarDesbloqueados}" />
+				</h:commandButton>
+				<br></br>
+				<br></br>
+				<h:dataTable id="blqBolTable" rendered="#{not empty bolsonData.bolsonDesList}" value="#{bolsonData.bolsonDesList}" var="bolsonDesbloqueado" styleClass="#{bolsonData.desResponse.tableStyle}"
+					columnClasses="td-table-result,td-table-result,td-table-result,td-table-result,td-table-result,td-table-result,td-table-result,td-table-result">
+			        <h:column>
+			        	<f:facet name="header">
+			                <h:outputText value="ID"/>
+			            </f:facet>
+			            <h:outputText value="#{bolsonDesbloqueado.id}"/>
+			        </h:column>
+			        <h:column>
+			            <f:facet name="header">
+			                <h:outputText value="Razón Social"/>
+			            </f:facet>
+			            <h:outputText value="#{bolsonDesbloqueado.nombre}"/>
+			        </h:column>
+			        <h:column>
+			            <f:facet name="header">
+			                <h:outputText value="RFC"/>
+			            </f:facet>
+			            <h:outputText value="#{bolsonDesbloqueado.rfc}"/>
+			        </h:column>
+			        <h:column>
+			            <f:facet name="header">
+			                <h:outputText value="Dirección"/>
+			            </f:facet>
+			            <h:outputText value="#{bolsonDesbloqueado.domicilio}"/>
+			        </h:column>
+			        <h:column>
+			            <f:facet name="header">
+			                <h:outputText value="Teléfono"/>
+			            </f:facet>
+			            <h:outputText value="#{bolsonDesbloqueado.telefono}"/>
+			        </h:column>
+			        <h:column>
+			            <f:facet name="header">
+			                <h:outputText value="Estatus"/>
+			            </f:facet>
+			            <h:outputText value="#{bolsonDesbloqueado.estatus}"/>
+			        </h:column>
+			    </h:dataTable>
+				<p>   
+					<h:outputText value="2.- Realice el desbloqueo del Bolsón" rendered="#{not empty bolsonData.bolsonDesList}"/>
+				</p>
+			    <h:commandButton value="Desbloquear" rendered="#{not empty bolsonData.bolsonDesList}"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="@form" render="@form" onevent="monitor"
+						listener="#{bolsonData.desbloquear}" />
+				</h:commandButton>
+				<h:panelGroup id="contentBlqBol">
+
+					<div class="#{bolsonData.desResponse.divStyle}"
+						style="margin-top: 20px; padding: 0 .7em;">
+						<p>
+							<span class="#{bolsonData.desResponse.icon}"
+								style="float: left; margin-right: .3em;"></span> 
+							<strong><h:outputText
+									id="outputTypeBlqBol" value="#{bolsonData.desResponse.name}" /></strong>&nbsp;
+							<h:outputText id="outputMessageBlqBol"
+								value="#{bolsonData.desResponse.descripcion}" />
+						</p>
+					</div>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+				</h:panelGroup>
+
+			</h:form>
+		</div>
+	</div>
+</h:body>
+</html>

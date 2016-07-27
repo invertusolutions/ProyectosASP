@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>Comisionistas</display-name>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/prelogin.jsf</location>
+	</error-page>
+	<session-config>
+		<session-timeout>
+			30
+		</session-timeout>
+	</session-config>
+	    <welcome-file-list>
+		<welcome-file>welcome.jsp</welcome-file>
+	</welcome-file-list>
+<filter>
+		<description>Check for multipart HttpServletRequests and parse the multipart form data so that all
+        regular form fields are available in the parameter Map of the HttpServletRequest and that
+        all form file fields are available as attribute of the HttpServletRequest. The attribute
+        value of a form file field can be an instance of FileItem or FileUploadException.</description>
+		<filter-name>multipartFilter</filter-name>
+		<filter-class>net.balusc.webapp.MultipartFilter</filter-class>
+		<init-param>
+			<description>
+            Sets the maximum file size of the uploaded file in bytes. Set to 0 to indicate an
+            unlimited file size. The example value of 1048576 indicates a maximum file size of
+            1MB. This parameter is not required and can be removed safely.
+        </description>
+			<param-name>maxFileSize</param-name>
+			<param-value>1048576</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>multipartFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+<context-param>
+    <param-name>resteasy.scan</param-name>
+    <param-value>false</param-value>
+</context-param>
+<context-param>
+    <param-name>resteasy.scan.providers</param-name>
+    <param-value>false</param-value>
+</context-param>
+<context-param>
+    <param-name>resteasy.scan.resources</param-name>
+    <param-value>false</param-value>
+</context-param>
+</web-app>

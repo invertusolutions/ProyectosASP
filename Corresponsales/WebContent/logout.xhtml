@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>JSF2 Ajax</title>
+	<h:outputScript library="js" name="jquery-1.12.4.js" />
+	<h:outputScript library="js" name="jquery-ui.js" />
+	<h:outputScript library="js" name="utils.js" />
+	<h:outputStylesheet library="css" name="jquery-ui.css" />
+	<h:outputStylesheet library="css" name="theme.css" />
+</h:head>
+
+<h:body>
+	<h:form id="logout">
+		<div style="background: url(img/logout.jpg) no-repeat; padding-top: 250px; padding-left: 70px;">
+			<table style="text-align: center;">
+				<tr><td><h:outputText value="Va a salir del Portal de Catálogo de Corresponsales" style="color:#414c68; font-size: 14pt;"/></td></tr>
+				<tr><td><br></br><h:commandButton value="Aceptar" styleClass="ui-button ui-widget ui-corner-all">
+									<f:ajax execute="@form" render="@form" onevent="postLogout"
+						listener="#{accessData.logout}" />
+						</h:commandButton></td></tr>
+			</table>
+			
+
+		</div>
+	
+	
+	</h:form>
+	
+</h:body>
+
+</html>

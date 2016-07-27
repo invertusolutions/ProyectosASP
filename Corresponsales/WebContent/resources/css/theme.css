@@ -1,0 +1,53 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-size: 10pt;
+}
+
+a {
+	color: #007eff;
+}
+#header {
+	height: 137px;
+	background: url(../img/fondo.jpg) no-repeat;
+	background-position: right;
+	vertical-align: bottom;
+	
+}
+
+h1 {
+	color: #415378;
+	font-size: 1.6 rem;
+	line-height: 1.2;
+	font-weight: bold;
+	text-align: right;
+}
+
+h2 {
+	position: absolute;
+	left: 600px;
+	top: 5px;
+	color: #00b3ff;
+	font-size: 9pt;
+}
+table {
+	width: 100%;
+	border-spacing: 3px;
+    border-collapse: separate;
+	
+}
+.td-table-result {
+	background-color:#FFF;
+	padding: 3px;
+}
+tr {
+	padding: 3px;
+}
+
+th {
+	padding: 3px;
+	text-align: left;
+	
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view>
+<h:head>
+	<title>JSF2 Ajax</title>
+	<h:outputScript library="js" name="jquery-1.12.4.js" />
+	<h:outputScript library="js" name="jquery-ui.js" />
+	<h:outputStylesheet library="css" name="jquery-ui.css" />
+	<h:outputStylesheet library="css" name="theme.css" />
+</h:head>
+
+
+<h:body>
+
+	<h:form id="loginPage">
+		<div style="height: 100px"></div>
+		<table>
+		<tr><td align="center">
+			<div style="background: url(img/login.png) no-repeat; width: 336px; height: 344px; text-align: center;">
+				<table>
+					<tr><td height="155px">&nbsp;</td></tr>
+					<tr><td><h:inputText id="inputUsr" value="#{accessData.user}" /></td></tr>
+					<tr><td height="20px">&nbsp;</td></tr>
+					<tr><td><h:inputSecret id="inputPwd" value="#{accessData.pwd}" /></td></tr>
+					<tr><td><br></br>
+							<h:commandButton value="Login" action="#{accessData.login}" 				
+								styleClass="ui-button ui-widget ui-corner-all">
+							</h:commandButton>
+					</td></tr>
+					<tr><td><h:outputText value="#{accessData.response.descripcion}" style="color: red;"/></td></tr>
+				</table>
+			</div>
+		</td></tr>
+		</table>
+	</h:form>
+
+</h:body>
+</f:view>
+</html>

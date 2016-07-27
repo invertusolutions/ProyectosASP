@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>JSF tutorial</title>
+	<script>
+		  $( function() {
+		    $( "#accordion" ).accordion();
+		  } );
+		</script>
+</h:head>
+<h:body>
+
+	<div id="accordion">
+		<h3>Cambio de Contraseña</h3>
+		<div>
+			<h:form id="cambioPwd">
+				<p>
+					Servicio para actualizar su contraseña
+				</p>
+				<table>
+					<tr>
+						<td><label for="pwd">Contraseña actual: </label></td>
+						<td><h:inputSecret id="inputPwd" value="#{securityData.pwd}"></h:inputSecret></td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td><label for="newPwd">Contraseña nueva: </label></td>
+						<td><h:inputSecret id="inputNewPwd" value="#{securityData.newPwd}"></h:inputSecret></td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td width="220px"><label for="newPwd">Confirmar contraseña nueva: </label></td>
+						<td width="200px"><h:inputSecret id="inputNewPwdConf" value="#{securityData.newPwdConfirm}"></h:inputSecret></td>
+						<td>&nbsp;</td>
+					</tr>
+				</table>
+				<br></br>
+				<br></br>
+
+				<h:commandButton value="Cambiar Contraseña"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="@form" render="@form" onevent="monitor"
+						listener="#{securityData.actualizarPWD}" />
+				</h:commandButton>
+
+				<div class="#{securityData.pwdResponse.divStyle}"
+					style="margin-top: 20px; padding: 0 .7em;">
+					<p>
+						<span class="#{securityData.pwdResponse.icon}"
+							style="float: left; margin-right: .3em;"></span> <strong><h:outputText
+								id="outputTypeUsr" value="#{securityData.pwdResponse.name}" /></strong>&nbsp;
+						<h:outputText id="outputMessageUsr"
+							value="#{securityData.pwdResponse.descripcion}" />
+					</p>
+				</div>
+				<br></br>
+			</h:form>
+		</div>
+		<h3>Obtener Autorización para nuevo Token</h3>
+		<div>
+			<h:form id="consultaTkn">
+				<p>
+					Servicio para consultar el número de autorización, favor de ingresar la contraseña de acceso:
+				</p>
+				<p>
+					<h:inputSecret value="#{securityData.pwdToken}" />
+				</p>
+				<h:commandButton value="Consultar"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="@form" render="@form" onevent="monitor"
+						listener="#{securityData.consultarToken}" />
+				</h:commandButton>
+	
+				<div class="#{securityData.tokenResponse.divStyle}"
+					style="margin-top: 20px; padding: 0 .7em;">
+					<p>
+						<span class="#{securityData.tokenResponse.icon}"
+							style="float: left; margin-right: .3em;"></span> <strong><h:outputText
+								id="outputTypeUsr" value="#{securityData.tokenResponse.name}" /></strong>&nbsp;
+						<h:outputText id="outputMessageUsr"
+							value="#{securityData.tokenResponse.descripcion}" />
+					</p>
+				</div>
+			</h:form>
+		 </div>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,9 @@
+<html>
+<head>
+</head>
+<body>
+	<%
+		response.sendRedirect("./main.jsp");
+	%>
+</body>
+</html>

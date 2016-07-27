@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>JSF tutorial</title>
+	<script>
+		  $( function() {
+		    $( "#accordion2" ).accordion();
+		  } );
+		  $( function() {
+			    $( ".dateIni" ).datepicker();
+			  } );
+		  $( function() {
+			    $( ".dateFin" ).datepicker();
+			  } );
+		</script>
+</h:head>
+<h:body>
+
+	<div id="accordion2">
+		<h3>Recuperación de Logs</h3>
+		<div>
+			<h:form id= "logs">
+				<p>Puede consultar las operaciones de acuerdo a los siguientes
+					filtros.</p>
+				<table width="100%">
+					<tr>
+						<td>
+							<strong>Tipo de Operación: </strong><br></br> 
+							<h:selectOneMenu value="#{reportData.tipoOperacion}">
+								<f:selectItem itemValue="0" itemLabel="Todos" />
+								<f:selectItem itemValue="1" itemLabel="Bloqueo de Usuario" />
+								<f:selectItem itemValue="2" itemLabel="Desbloqueo de Usuario" />
+								<f:selectItem itemValue="3" itemLabel="Cambio de Contraseña" />
+								<f:selectItem itemValue="4" itemLabel="Obtener Autorización" />
+							</h:selectOneMenu>
+						</td>
+						<td>
+							<strong>Usuario: </strong><br></br>
+							<h:inputText id="inputUser" value="#{reportData.user}"></h:inputText>
+						</td>
+						<td>
+							<strong>Fecha Inicio: </strong><br></br>
+							<img src="img/calendar-icon.png" width="15px"></img>&nbsp;
+							<h:inputText id="dateIni" styleClass="dateIni" readonly="true"></h:inputText>
+							<h:inputHidden id="fechaIni" value="#{reportData.fechaIni}" /> 
+						</td>
+						<td>
+							<strong>Fecha Final: </strong><br></br>
+							<img src="img/calendar-icon.png" width="15px"></img>&nbsp;
+							<h:inputText id="dateFin" styleClass="dateFin"  readonly="true"></h:inputText>
+							<h:inputHidden id="fechaFin" value="#{reportData.fechaFin}" /> 
+						</td>
+					</tr>
+				</table>
+				<br></br>
+				<h:commandButton value="Buscar" onclick="sendHiddenValue()"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="@form" render="@form" onevent="activaCalendar"
+						listener="#{reportData.buscar}" />
+				</h:commandButton>
+				<br></br>
+				<br></br>
+				<h:dataTable id="reportTable"
+					rendered="#{not empty reportData.reportList}"
+					value="#{reportData.reportList}" var="logs"
+					styleClass="#{reportData.response.tableStyle}"
+					columnClasses="td-table-result,td-table-result,td-table-result,td-table-result,td-table-result,td-table-result">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Folio" />
+						</f:facet>
+						<h:outputText value="#{logs.folio}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Operación" />
+						</f:facet>
+						<h:outputText value="#{logs.operacion}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Usuario" />
+						</f:facet>
+						<h:outputText value="#{logs.usuario}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Fecha / Hora" />
+						</f:facet>
+						<h:outputText value="#{logs.fechaHora}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Descripción" />
+						</f:facet>
+						<h:outputText value="#{logs.descripcion}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Estatus" />
+						</f:facet>
+						<h:outputText value="#{logs.estatus}" />
+					</h:column>
+				</h:dataTable>
+				<br></br>
+				<h:commandButton value="Imprimir"
+					rendered="#{not empty reportData.reportList}"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="@form" render="@form" onevent="activaCalendar"
+						listener="#{reportData.imprimir}" />
+				</h:commandButton>
+			</h:form>
+			<br></br>
+			<br></br>
+			<br></br>
+			<br></br>
+			<br></br>
+			<br></br>
+		</div>
+
+	</div>
+
+
+</h:body>
+</html>

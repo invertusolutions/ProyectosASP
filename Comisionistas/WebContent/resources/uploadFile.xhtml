@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+  <title>JSF2 Ajax File Upload Example</title>
+	<link rel="stylesheet"	href="css/jquery-ui.css"></link>
+	<link rel="stylesheet"	href="css/theme.css"></link>
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/utils.js"></script>
+  <script src="js/jquery-1.10.1.min.js"></script>
+  <script src="js/jquery-migrate-1.2.1.min.js"></script>
+
+</head>
+
+
+<body>
+
+	<f:view>
+		<h:form id="fileUploadForm" enctype="multipart/form-data"
+			target="uploadTarget">
+				<div class="ui-widget">			
+				<p>1.- Seleccione el tipo de archivo</p>
+				<h:selectOneRadio value="#{uploadFormController.aFormElement}" styleClass="ui-button ui-corner-all">
+					<f:selectItem itemValue="1" itemLabel="Archivo de Logs"  />
+					<f:selectItem itemValue="2" itemLabel="Bitácora de Operaciones" />
+				</h:selectOneRadio>
+				
+				<p>2.- Dar clic en el botón de examinar para buscar el archivo</p>
+				<p>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="uploadFile" id="uploadFile" class="ui-state-highlight ui-corner-all"/>
+				</p>
+				<h:commandButton id="uploadButton" value="Cargar Archivo" styleClass="ui-button ui-widget ui-corner-all"
+					action="#{uploadFormController.upload}"/>
+					
+			<div  style="margin-top: 20px; padding: 0 .7em;" id="uploadStatusMessage">
+			<p>
+				<span class="ui-icon ui-icon-alert"
+					style="float: left; margin-right: .3em;"></span> 
+				<strong>
+					<h:outputText id="outputMessage" value="" /> 
+				</strong>&nbsp;
+			</p>
+			</div>	
+			<p>3.- Dar clic en el siguiente botón para mandar el archivo cargado</p>
+
+				<h:commandButton id="sendButton" value="Enviar Archivo" styleClass="ui-button ui-widget ui-corner-all"
+					action="#{uploadFormController.sendFile}"/>
+					
+			<div  style="margin-top: 20px; padding: 0 .7em;" id="uploadStatusMessage">
+			<p>
+				<span class="ui-icon ui-icon-alert"
+					style="float: left; margin-right: .3em;"></span> 
+				<strong>
+					<h:outputText id="finalMessage" value="" />
+				</strong>&nbsp;
+				
+			</p>
+			</div>
+			<h:inputHidden value="#{uploadFormController.uploadFilePrefix}" id="uploadFilePrefix" />
+			<h:inputHidden value="#{uploadFormController.uploadSuccessful}" id="uploadSuccessful" />
+		</div>		
+		</h:form>
+	</f:view>
+	
+
+	<iframe id="uploadTarget" name="uploadTarget" src="#"
+		style="width: 0; height: 0; border: 0px solid #fff;"></iframe>
+
+</body>
+
+</html>

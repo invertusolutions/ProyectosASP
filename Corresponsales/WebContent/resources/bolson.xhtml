@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>JSF tutorial</title>
+	<script>
+		  $( function() {
+		    $( "#accordion" ).accordion();
+		  } );
+	</script>
+</h:head>
+<h:body>
+
+	<div id="accordion">
+		<h3>Actualizar importe</h3>
+		<div>
+			<h:form id="ampliaBolson">
+				<p>
+					<label for="user">1.- Ingrese el número de cuenta para
+						conocer el monto del Bolsón: </label>
+					<h:inputText id="inputBolson" value="#{ampliacionData.inputCuenta}"></h:inputText>
+				</p>
+				<p>
+				<h:commandButton value="Continuar"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="@form" render="@form" onevent="monitor"
+						listener="#{ampliacionData.buscar}" />
+				</h:commandButton>
+				</p>
+				<p>
+					<h:outputText value="Información del Bolsón:"
+						rendered="#{not empty ampliacionData.cuenta}" />
+				</p>
+				<table width="400px" cellpadding="3" cellspacing="3">
+					<tr>
+						<td width="25px"></td>
+						<td><b><h:outputText value="Número de Cuenta:"
+									rendered="#{not empty ampliacionData.cuenta}" /></b></td>
+						<td><h:outputText value="#{ampliacionData.cuenta}" /></td>
+						<td width="50%x"></td>
+					</tr>
+					<tr>
+						<td width="25px"></td>
+						<td><b><h:outputText value="Monto del Bolsón:"
+									rendered="#{not empty ampliacionData.monto}" /></b></td>
+						<td><h:outputText value="#{ampliacionData.monto}" /></td>
+						<td width="50%x"></td>
+					</tr>
+
+				</table>
+				<p>
+					<h:outputText
+						value="2.- Actualice el importe en el siguiente campo"
+						rendered="#{not empty ampliacionData.cuenta}" />
+				</p>
+				<p>
+					<h:inputText id="inputBolsonMonto"
+						value="#{ampliacionData.inputMonto}"
+						rendered="#{not empty ampliacionData.cuenta}" ></h:inputText>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="Actualizar" onclick="return validaMonto()"
+					rendered="#{not empty ampliacionData.cuenta}"
+					styleClass="ui-button ui-widget ui-corner-all">
+					<f:ajax execute="@form" render="@form" onevent="monitor"
+						listener="#{ampliacionData.actualizar}" />
+				</h:commandButton>
+				</p>
+				<div class="#{ampliacionData.response.divStyle}"
+					style="margin-top: 20px; padding: 0 .7em;">
+					<p>
+						<span class="#{ampliacionData.response.icon}"
+							style="float: left; margin-right: .3em;"></span> <strong><h:outputText
+								id="outputTypeBlqBol" value="#{ampliacionData.response.name}" /></strong>&nbsp;
+						<h:outputText id="outputMessageBlqBol"
+							value="#{ampliacionData.response.descripcion}" />
+					</p>
+				</div>
+			</h:form>
+			<br></br>
+			<br></br>
+			<br></br>
+			<br></br>
+			<br></br>
+			<br></br>
+			<br></br>
+			
+			
+		</div>
+
+	</div>
+
+
+</h:body>
+</html>
